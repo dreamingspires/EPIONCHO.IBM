@@ -39,7 +39,6 @@ find_indiv_totest_func <- function(dat, mf.start, mf.end, morb.mat.tmp, temp_mf,
   morb.mat.tmp$HangingGroinSampleAges <- ifelse((round(morb.mat.tmp$Age,6) %in% round(age_to_samp_vec_nonreversible,6)),1,0) # hanging groin
   morb.mat.tmp$DepigSampleAge <- ifelse((round(morb.mat.tmp$Age,6) %in% round(age_to_samp_vec_nonreversible,6)),1,0) # depigmentation
 
-
   # ==================================#
   # WHOM TO UNDERGO BERNOULI TRAIL #
   # # based on > 0 true mf
@@ -175,7 +174,6 @@ update_reversible_sequela_func <- function(sequela.postive.mat1, sequela.postive
   # sequela.postive.mat2[,1] <- morb.mat.tmp$RSDStatus # update first col with current sequela state on that day
   #
   # morb.mat.tmp$RSDStatus <- ifelse(day3RSDStatus == 1, 0, morb.mat.tmp$RSDStatus) # update current disease status
-
   return(list(sequela.postive.mat1, sequela.postive.mat2, morb.mat.tmp))
 
 }
@@ -225,6 +223,7 @@ morbidity_prev_func <- function(morb.mat.tmp, N, SI_prev, RSD_prev, Atrp_prev, H
   HG_prev_temp <- length(which(morb.mat.tmp$HGStatus == 1 & morb.mat.tmp$Age >= 5)) /  length(which(morb.mat.tmp$Age >= 5)) # prev in > 5yrs
   #depigm_prev_temp <- sum(morb.mat.tmp$DepigStatus)/N # depigmentation
   depigm_prev_temp <- length(which(morb.mat.tmp$DepigStatus == 1 & morb.mat.tmp$Age >= 5)) /  length(which(morb.mat.tmp$Age >= 5)) # prev in > 5yrs
+
 
   # update prevalence vectors
   SI_prev <- c(SI_prev, SI_prev_temp)
@@ -442,6 +441,7 @@ new_cases_morbidity_func2 <- function(morb.mat.tmp, temp.mf, blind.probs){
   # update blindness status based on age in 2 years (i.e., those 0-2 yrs in 2 yrs time will be 0 blindness) #
 
   morb.mat.tmp$BlindnessStatus2Yrs <- ifelse(morb.mat.tmp$LaggedAgeOver80 < 2, 0, morb.mat.tmp$BlindnessStatus) # set to 0 for 0-2 yrs in 2 yrs time, or as in col 9
+
 
   return(morb.mat.tmp)
 
